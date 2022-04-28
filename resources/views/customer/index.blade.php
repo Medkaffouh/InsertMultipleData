@@ -43,9 +43,9 @@
             @csrf
             <h1>Form Input Data</h1>
 
-            @if(session('status'))
+            @if (session('status'))
                 <div class="alert alert-success">
-                    {{session('status')}}
+                    {{ session('status') }}
                 </div>
             @endif
             <div class="mb-3 mt-5">
@@ -60,26 +60,48 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Legende</label>
-                <input type="text" class="form-control" name="legende" value="{{ old('legende') }}"
+                <input type="text" class="form-control" name="legende[]" value="{{ old('legende') }}"
                     placeholder="type your legende" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Phone</label>
-                <input type="text" class="form-control" name="phone" value="{{ old('phone') }}"
+                <input type="text" class="form-control" name="phone[]" value="{{ old('phone') }}"
                     placeholder="type your phone" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Code Postale</label>
-                <input type="text" class="form-control" name="code_postale" value="{{ old('code_postale') }}"
+                <input type="text" class="form-control" name="code_postale[]" value="{{ old('code_postale') }}"
                     placeholder="type your Code Postale" required>
             </div>
 
+            <div class="mb-3 d-flex justify-content-end">
+                <label class="form-label"></label>
+                <a href="#" class="addcustomer btn btn-primary ">Add Address</a>
+            </div>
+
+            <div class="customer"></div>
+
             <div class="mb-3 mt-5">
-                <input type="submit" class="btn btn-success form-control" value="Submit"
-                     required>
+                <input type="submit" class="btn btn-success form-control" value="Submit" required>
             </div>
         </form>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('.addcustomer').on('click', function() {
+            addcustomer();
+        });
+
+        function addcustomer() {
+            var customer =
+                '<div><div class="mb-3"><label class="form-label">Legende</label><input type="text" class="form-control" name="legende[]" value="{{ old('legende') }}" placeholder="type your legende" required></div><div class="mb-3"><label class="form-label">Phone</label><input type="text" class="form-control" name="phone[]" value="{{ old('phone') }}" placeholder="type your phone" required></div><div class="mb-3"><label class="form-label">Code Postale</label><input type="text" class="form-control" name="code_postale[]" value="{{ old('code_postale') }}" placeholder="type your Code Postale" required></div><div class="mb-3 d-flex justify-content-end"><label class="form-label"></label><a href="#" class="remove btn btn-danger">Remve Address</a></div></div>';
+            $('.customer').append(customer)
+        };
+        $('.remove').live('click', function() {
+            $(this).remove();
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
