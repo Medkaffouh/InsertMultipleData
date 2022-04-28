@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+Route::post('/customer', [CustomerController::class, 'store'])->name('store.customer');

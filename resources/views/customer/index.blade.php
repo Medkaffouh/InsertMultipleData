@@ -39,8 +39,15 @@
         </nav>
 
 
-        <form class="mt-5">
+        <form class="mt-5" action="{{ route('store.customer') }}" method="POST">
+            @csrf
             <h1>Form Input Data</h1>
+
+            @if(session('status'))
+                <div class="alert alert-success">
+                    {{session('status')}}
+                </div>
+            @endif
             <div class="mb-3 mt-5">
                 <label class="form-label">Name</label>
                 <input type="text" class="form-control" name="name" value="{{ old('name') }}"
